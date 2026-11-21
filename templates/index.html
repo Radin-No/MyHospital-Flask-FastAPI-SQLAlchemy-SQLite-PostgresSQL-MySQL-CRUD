@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Table: {{ table }}</h2>
+    <hr>
+    {% for r in records %}
+        <a href="{{ url_for('details', table=table, id=r.id) }}">
+            <h1>{{ r.id }}</h1>
+        </a>
+        <hr>
+    {% endfor %}
+{% endblock content %}
+{% block title %}index{% endblock title %}

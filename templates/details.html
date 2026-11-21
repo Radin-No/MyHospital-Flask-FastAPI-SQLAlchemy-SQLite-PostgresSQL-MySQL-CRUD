@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+    <a href="{{ url_for('index', table=table) }}" class="btn btn-success">GoBack</a>
+    <!--<a href="{{ url_for('delete', table=table, id=record.id) }}" class="btn btn-danger">Delete</a>-->
+    <a onclick="confirmDelete()" class="btn btn-danger">Delete</a>
+    <a href="{{ url_for('update', table=table, id=record.id) }}" class="btn btn-primary">Update</a>
+
+    <h1>ID: {{ record.id }}</h1>
+
+    {% if table == 'doctors' %}
+        <h2>Name: {{ record.name }}</h2>
+        <h3>Specialty: {{ record.specialty }}</h3>
+
+    {% elif table == 'patients' %}
+        <h2>Name: {{ record.name }}</h2>
+        <h3>Illness: {{ record.illness }}</h3>
+
+    {% elif table == 'contract_pharma' %}
+        <h2>Name: {{ record.name }}</h2>
+        <h3>Location: {{ record.location }}</h3>
+
+    {% elif table == 'meds' %}
+        <h2>Name: {{ record.name }}</h2>
+        <h3>Pharma ID: {{ record.pharr_id }}</h3>
+        <h3>Is Pill: {{ record.is_pill }}</h3>
+        <h3>Stock: {{ record.stock }}</h3>
+        <h3>Price: {{ record.price }}</h3>
+
+    {% elif table == 'prescription' %}
+        <h2>Date: {{ record.date }}</h2>
+        <h3>Doctor ID: {{ record.doc_id }}</h3>
+        <h3>Patient ID: {{ record.pat_id }}</h3>
+        <h3>Pharma ID: {{ record.phar_id }}</h3>
+        <h3>Is Done: {{ record.is_done }}</h3>
+
+    {% elif table == 'prescription_items' %}
+        <h2>Prescription ID: {{ record.prescr_id }}</h2>
+        <h3>Med ID: {{ record.med_id }}</h3>
+        <h3>Instructions: {{ record.cons_instr }}</h3>
+    {% endif %}
+
+    <script>
+        function confirmDelete()
+        {
+            var res = confirm('Are you sure to delete record? ');
+            if (res == true)
+            {
+                window.location.href = "{{ url_for('delete', table=table, id=record.id) }}";
+            }
+        }
+    </script>
+{% endblock content %}
+{% block title %}Details{% endblock title %}

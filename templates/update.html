@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}update{% endblock title %}
+
+{% block content %}
+    <a href="{{ url_for('details', table=table, id=record.id) }}" class="btn btn-success">GoBack</a>
+    <h2>Update {{ table }} (ID: {{ record.id }})</h2>
+    <hr>
+
+    <form action="{{ url_for('update', table=table, id=record.id) }}" method="post">
+        {% if table == 'doctors' %}
+            <label for="name">name:</label>
+            <input type="text" name="name" value="{{ record.name }}"><br><br>
+            <label for="specialty">specialty:</label>
+            <input type="text" name="specialty" value="{{ record.specialty }}"><br><br>
+
+        {% elif table == 'patients' %}
+            <label for="name">name:</label>
+            <input type="text" name="name" value="{{ record.name }}"><br><br>
+            <label for="illness">illness:</label>
+            <input type="text" name="illness" value="{{ record.illness }}"><br><br>
+
+        {% elif table == 'contract_pharma' %}
+            <label for="name">name:</label>
+            <input type="text" name="name" value="{{ record.name }}"><br><br>
+            <label for="location">location:</label>
+            <input type="text" name="location" value="{{ record.location }}"><br><br>
+
+        {% elif table == 'meds' %}
+            <label for="pharr_id">pharr_id (FK to contract_pharma):</label>
+            <input type="number" name="pharr_id" value="{{ record.pharr_id }}"><br><br>
+            <label for="name">name:</label>
+            <input type="text" name="name" value="{{ record.name }}"><br><br>
+            <label for="is_pill">is_pill (1 or 0):</label>
+            <input type="number" name="is_pill" value="{{ record.is_pill }}"><br><br>
+            <label for="stock">stock:</label>
+            <input type="number" name="stock" value="{{ record.stock }}"><br><br>
+            <label for="price">price:</label>
+            <input type="number" step="any" name="price" value="{{ record.price }}"><br><br>
+
+        {% elif table == 'prescription' %}
+            <label for="doc_id">doc_id (FK to doctors):</label>
+            <input type="number" name="doc_id" value="{{ record.doc_id }}"><br><br>
+            <label for="pat_id">pat_id (FK to patients):</label>
+            <input type="number" name="pat_id" value="{{ record.pat_id }}"><br><br>
+            <label for="phar_id">phar_id (FK to contract_pharma):</label>
+            <input type="number" name="phar_id" value="{{ record.phar_id }}"><br><br>
+            <label for="date">date (YYYY-MM-DD):</label>
+            <input type="text" name="date" value="{{ record.date }}"><br><br>
+            <label for="is_done">is_done (1 or 0):</label>
+            <input type="number" name="is_done" value="{{ record.is_done }}"><br><br>
+
+        {% elif table == 'prescription_items' %}
+            <label for="prescr_id">prescr_id (FK to prescription):</label>
+            <input type="number" name="prescr_id" value="{{ record.prescr_id }}"><br><br>
+            <label for="med_id">med_id (FK to meds):</label>
+            <input type="number" name="med_id" value="{{ record.med_id }}"><br><br>
+            <label for="cons_instr">cons_instr:</label>
+            <input type="text" name="cons_instr" value="{{ record.cons_instr }}"><br><br>
+        {% endif %}
+
+        <input type="submit" value="update" class="btn btn-primary">
+    </form>
+{% endblock content %}

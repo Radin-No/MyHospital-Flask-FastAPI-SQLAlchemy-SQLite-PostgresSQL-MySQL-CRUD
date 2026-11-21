@@ -1,0 +1,14 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ url_for('create', table=table) }}">Create ({{ table }})</a>
+    </div>
+    <ul class="nav navbar-nav">
+      {% for t in tables %}
+        <li class="{% if t == table %}active{% endif %}">
+          <a href="{{ url_for('index', table=t) }}">{{ t }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
